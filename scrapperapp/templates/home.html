@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Scrapper</title>
+
+    <!-- add icon link -->
+    <link rel="icon" href="static/robot.png" type="image/icon type" />
+
+    <!-- Adding Bootstrap file -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap.min.css') }}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
+  </head>
+  <body>
+    <br /><br /><br /><br /><br />
+
+    <!-- Start of our Input Card -->
+    <div class="container">
+      <div class="hovernow rounded">
+        <div class="card border-0">
+          <div class="card-body">
+            <!-- Main Input For Receiving Query to our ML -->
+            <form
+              id="form_id"
+              action="{{ url_for('prediction')}}"
+              method="post"
+            >
+              <div class="form-group">
+                <h4>
+                  <label for="url_id">Enter URL Here : </label>
+                </h4>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  id="url_id"
+                  name="urlinput"
+                  required="required"
+                />
+                <h10 style="font-size: 12px; color: red">{{invalid_url}}</h10>
+              </div>
+              <br />
+              <div id="main_button">
+                <button type="submit" class="btn btn-outline-info">
+                  Get Sentences
+                </button>
+              </div>
+              <div id="spnr" class="spinner-displayer center"></div>
+              <div id="spnr" class="center">
+                <p id="spinner_p_tag"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of our Input Card -->
+  </body>
+
+  <!-- Adding Javascript and Jquery files -->
+
+  <script type="text/javascript" src="static/jquery.min.js"></script>
+  <script type="text/javascript" src="static/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+    function spinner() {
+      const spinnerDisplayer = document.querySelector(".spinner-displayer");
+      const btn = document.getElementById("main_button");
+
+      document
+        .getElementById("form_id")
+        .addEventListener("submit", function () {
+          document.getElementById("main_button").style.display = "none";
+          document.getElementById("spnr").style.display = "block";
+          spinnerDisplayer.classList.add("loading");
+          document.getElementById("spinner_p_tag").innerHTML = "Processing...";
+          localStorage.setItem("hide_spinner", true);
+        });
+    }
+
+    function hidespinner() {
+      document.getElementById("main_button").style.display = "block";
+      document.getElementById("spnr").style.display = "none";
+      document.getElementById("spinner_p_tag").innerHTML = "";
+      localStorage.removeItem("hide_spinner");
+    }
+
+    spinner();
+
+    if (localStorage.getItem("hide_spinner")) {
+      hidespinner();
+    }
+  </script>
+</html>
