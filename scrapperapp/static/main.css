@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: JuliusSansOne;
-  src: url(static/JuliusSansOne-Regular.woff2);
+  src: url(JuliusSansOne-Regular.woff2);
 }
 
 @font-face {
   font-family: PlayfairDisplay;
-  src: url(static/PlayfairDisplay-Regular.woff2);
+  src: url(PlayfairDisplay-Regular.woff2);
 }
 
 .hovernow {
@@ -43,6 +43,12 @@ h3 {
 p {
   font-family: JuliusSansOne;
   text-align: center;
+}
+
+#main_headline {
+  font-family: JuliusSansOne;
+  text-align: center;
+  font-size: 72px;
 }
 
 #main_button {
